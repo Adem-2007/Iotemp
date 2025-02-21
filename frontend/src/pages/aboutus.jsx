@@ -106,7 +106,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-gray-900 rounded-lg shadow-md p-6 text-center hover:scale-105 transition duration-300" whileHover={{ scale: 1.05 }} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.6 }}>
                             {/* Replaced placeholder image with memeberImage as per critique */}
                             <img src={Wassim} alt="Dr. Williams" className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-500" aria-hidden="true" />
-                            <h4 className="text-xl font-semibold text-white">Bahloul Wassim Anpuar</h4>
+                            <h4 className="text-xl font-semibold text-white">Bahloul Wassim</h4>
                             <p className="text-blue-200 mb-2">SoftxHardware</p>
                             <p className="text-gray-400">"The responsable for build the product "</p>
                         </motion.div>
