@@ -24,14 +24,12 @@ const AboutUsPage = () => {
                         className="text-4xl md:text-5xl font-bold text-white mb-4"
                         initial={{ y: -20, opacity: 0 }} // initial value for non-in-view state
                         whileInView={{ y: 0, opacity: 1 }} // animate when in view
-                        viewport={{  }} // removed once: true
                         transition={{ duration: 0.7, delay: 0.3 }}
                     >💖 Welcome to MedCare Plus 🏥</motion.h2>
                     <motion.p
                         className="text-lg text-gray-300 mb-8 md:w-2/3 mx-auto"
                         initial={{ opacity: 0 }} // initial value for non-in-view state
                         whileInView={{ opacity: 1 }} // animate when in view
-                        viewport={{  }} // removed once: true
                         transition={{ duration: 0.7, delay: 0.5 }}
                     >
                         Dedicated to providing exceptional medical care with compassion and innovation. Learn more about our mission, values, and the team behind MedCare Plus.
@@ -47,7 +45,7 @@ const AboutUsPage = () => {
                             className="md:order-2"
                             initial={{ x: 50, opacity: 0 }} // initial value for non-in-view state
                             whileInView={{ x: 0, opacity: 1 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.6, delay: 0.4 }}
                         >
                             {/* Replaced placeholder image with critiqueImageUrl as per critique */}
@@ -57,7 +55,7 @@ const AboutUsPage = () => {
                             className="md:order-1"
                             initial={{ x: -50, opacity: 0 }} // initial value for non-in-view state
                             whileInView={{ x: 0, opacity: 1 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.6, delay: 0.4 }}
                         >
                             <h3 className="text-3xl font-semibold text-blue-400 mb-4 flex items-center"><FaStethoscope className="mr-2" /> Our Mission</h3>
@@ -67,7 +65,7 @@ const AboutUsPage = () => {
                                 className="text-gray-300 leading-relaxed mt-4"
                                 initial={{ opacity: 0 }} // initial value for non-in-view state
                                 whileInView={{ opacity: 1 }} // animate when in view
-                                viewport={{  }} // removed once: true
+    
                                 transition={{ duration: 0.5, delay: 0.8 }}
                             >
                                 We strive to be a leading healthcare provider recognized for our clinical expertise, advanced technology, and dedication to personalized care.
@@ -82,7 +80,6 @@ const AboutUsPage = () => {
                     <motion.div className="text-center mb-12"
                         initial={{ opacity: 0, y: 20 }} // initial value for non-in-view state
                         whileInView={{ opacity: 1, y: 0 }} // animate when in view
-                        viewport={{  }} // removed once: true
                         transition={{ duration: 0.6 }}
                     >
                         <h2 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 flex justify-center items-center"><FaUsers className="mr-2" /> Meet Our Dedicated Team 🧑‍⚕️👩‍⚕️</h2>
@@ -93,7 +90,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-gray-900 rounded-lg shadow-md p-6 text-center hover:scale-105 transition duration-300" whileHover={{ scale: 1.05 }}
                             initial={{ opacity: 0, y: 50 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, y: 0 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.5, delay: 0.2 }}
                         >
                             {/* Replaced placeholder image with critiqueImageUrl as per critique */}
@@ -106,7 +103,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-gray-900 rounded-lg shadow-md p-6 text-center hover:scale-105 transition duration-300" whileHover={{ scale: 1.05 }}
                             initial={{ opacity: 0, y: 50 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, y: 0 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.5, delay: 0.4 }}
                         >
                             {/* Replaced placeholder image with memeberImage as per critique */}
@@ -119,7 +116,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-gray-900 rounded-lg shadow-md p-6 text-center hover:scale-105 transition duration-300" whileHover={{ scale: 1.05 }}
                             initial={{ opacity: 0, y: 50 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, y: 0 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.5, delay: 0.6 }}
                         >
                             {/* Replaced placeholder image with memeberImage as per critique */}
@@ -131,7 +128,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-gray-900 rounded-lg shadow-md p-6 text-center hover:scale-105 transition duration-300" whileHover={{ scale: 1.05 }}
                             initial={{ opacity: 0, y: 50 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, y: 0 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.5, delay: 0.6 }}
                         >
                             {/* Replaced placeholder image with memeberImage as per critique */}
@@ -152,14 +149,14 @@ const AboutUsPage = () => {
                             className="text-3xl md:text-4xl font-bold text-blue-400 mb-2 flex justify-center items-center"
                             initial={{ opacity: 0, y: 20 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, y: 0 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.6, delay: 0.2 }}
                         ><FaHeartbeat className="mr-2" /> Our Core Values ❤️</motion.h2>
                         <motion.p
                             className="text-gray-300 md:w-2/3 mx-auto"
                             initial={{ opacity: 0 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.6, delay: 0.4 }}
                         >Our values are the foundation of our practice and guide us in everything we do.</motion.p>
                     </div>
@@ -168,7 +165,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-blue-600 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
                             initial={{ opacity: 0, scale: 0.9 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, scale: 1 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.5, delay: 0.3 }}
                         >
                             <h4 className="text-xl font-semibold text-white mb-2 flex items-center justify-center"><FaHandsHelping className="mr-2" /> Compassion 💖</h4>
@@ -178,7 +175,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-blue-600 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
                             initial={{ opacity: 0, scale: 0.9 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, scale: 1 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.5, delay: 0.5 }}
                         >
                             <h4 className="text-xl font-semibold text-white mb-2 flex items-center justify-center"><FaMedal className="mr-2" /> Excellence ✨</h4>
@@ -188,7 +185,7 @@ const AboutUsPage = () => {
                         <motion.div className="bg-blue-600   p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 transform hover:scale-105"
                             initial={{ opacity: 0, scale: 0.9 }} // initial value for non-in-view state
                             whileInView={{ opacity: 1, scale: 1 }} // animate when in view
-                            viewport={{  }} // removed once: true
+
                             transition={{ duration: 0.5, delay: 0.7 }}
                         >
                             <h4 className="text-xl font-semibold text-white mb-2 flex items-center justify-center"><FaLightbulb className="mr-2" /> Innovation 🚀</h4>
