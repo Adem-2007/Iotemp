@@ -107,6 +107,7 @@ const AboutUsPage = () => {
                             {/* Replaced placeholder image with memeberImage as per critique */}
                             <img src={Wassim} alt="Dr. Williams" className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-500" aria-hidden="true" />
                             <h4 className="text-xl font-semibold text-white">Bahloul Wassim</h4>
+                            <h4 className="text-xl font-semibold text-white">Bahloul Wassim </h4>
                             <p className="text-blue-200 mb-2">SoftxHardware</p>
                             <p className="text-gray-400">"The responsable for build the product "</p>
                         </motion.div>
