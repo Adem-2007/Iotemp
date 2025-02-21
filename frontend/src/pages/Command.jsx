@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaIdCard } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaIdCard, FaSpinner } from 'react-icons/fa'; // Import FaSpinner
 import InputField from '../components/price/InputField'; // Assuming InputField is correctly placed
 import Message from '../components/price/Message'; // Import the Message component
 
 const UserInfoForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
+
   // State to store input values
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -21,7 +23,7 @@ const UserInfoForm = () => {
   const [numberError, setNumberError] = useState(false);
   const [addressError, setAddressError] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => { // Make handleSubmit async
     event.preventDefault();
 
     // Reset errors before validation
@@ -56,13 +58,39 @@ const UserInfoForm = () => {
     }
 
     if (isValid) {
-      // Form submission logic here (e.g., sending data to a server)
-      setTimeout(() => {
-        setIsSubmitted(true);
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 2000);
-      }, 0);
+      setIsSubmitting(true); // Start loading
+
+      try {
+        const response = await fetch('http://localhost:5000/api/user-info', { // Backend endpoint for user info
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ firstName, lastName, email, number, address }),
+        });
+
+        if (response.ok) {
+          setIsSubmitted(true);
+          setTimeout(() => {
+            setIsSubmitted(false);
+          }, 2000);
+          // Clear form fields on success
+          setFirstName('');
+          setLastName('');
+          setEmail('');
+          setNumber('');
+          setAddress('');
+        } else {
+          const errorData = await response.json(); // Or response.text() if backend sends plain text
+          console.error('Submission error:', errorData);
+          alert(`Submission failed: ${errorData.message || 'Something went wrong.'}`); // Simple error alert
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        alert('Fetch error occurred. Please try again.'); // Simple fetch error alert
+      } finally {
+        setIsSubmitting(false); // End loading regardless of success or failure
+      }
     }
   };
 
@@ -102,7 +130,8 @@ const UserInfoForm = () => {
           Icon={FaUser}
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          error={firstNameError} // Pass error state
+          error={firstNameError}
+          disabled={isSubmitting} // Disable input while submitting
         />
         <InputField
           label="Last Name"
@@ -112,7 +141,8 @@ const UserInfoForm = () => {
           Icon={FaUser}
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          error={lastNameError} // Pass error state
+          error={lastNameError}
+          disabled={isSubmitting} // Disable input while submitting
         />
         <InputField
           label="Email Address"
@@ -122,7 +152,8 @@ const UserInfoForm = () => {
           Icon={FaEnvelope}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          error={emailError} // Pass error state
+          error={emailError}
+          disabled={isSubmitting} // Disable input while submitting
         />
         <InputField
           label="Phone Number"
@@ -132,7 +163,8 @@ const UserInfoForm = () => {
           Icon={FaPhone}
           value={number}
           onChange={(e) => setNumber(e.target.value)}
-          error={numberError} // Pass error state
+          error={numberError}
+          disabled={isSubmitting} // Disable input while submitting
         />
         <InputField
           label="Address"
@@ -142,20 +174,26 @@ const UserInfoForm = () => {
           Icon={FaMapMarkerAlt}
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          error={addressError} // Pass error state
+          error={addressError}
+          disabled={isSubmitting} // Disable input while submitting
         />
 
         <div className="flex items-center justify-between">
           <motion.button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-105 transition-transform duration-200"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-105 transition-transform duration-200 disabled:opacity-50 disabled:cursor-wait"
             type="submit"
             whileTap={{ scale: 0.95 }}
+            disabled={isSubmitting} // Disable button while submitting
           >
-            Submit <span role="img" aria-label="submit">✅</span>
+            {isSubmitting ? (
+              <div className="flex items-center justify-center">
+                <FaSpinner className="animate-spin mr-2" /> {/* Spinner Icon */}
+                Submitting...
+              </div>
+            ) : (
+              'Submit ✅'
+            )}
           </motion.button>
-          <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-            Forgot Password?
-          </a>
         </div>
       </motion.form>
       {isSubmitted && <Message />} {/* Conditionally render Message component */}

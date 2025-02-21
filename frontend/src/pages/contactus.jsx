@@ -2,26 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
+import { FaSpinner } from 'react-icons/fa'; // Import spinner icon
 
-
-/**
- * ContactUs Component 🚀
- * A reusable contact page component for React applications.
- * Features a contact form and contact information section. 💌
- */
 const ContactUs = ({ backgroundImage }) => {
-    // State for form inputs
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [formError, setFormError] = useState(null);
     const [formSuccess, setFormSuccess] = useState(null);
+    const [isSubmitting, setIsSubmitting] = useState(false); // State for loading
 
-    /**
-     * Handles form submission. ✉️
-     * For now, it simulates a successful submission after a short delay.
-     * In a real application, you would send this data to a backend server.
-     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         setFormError(null);
@@ -32,23 +22,38 @@ const ContactUs = ({ backgroundImage }) => {
             return;
         }
 
-        // Basic email validation
         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if (!emailRegex.test(email)) {
             setFormError('Please enter a valid email address. 😓');
             return;
         }
 
+        setIsSubmitting(true); // Set loading state to true before submission
+
         try {
-            // Simulate form submission delay and success
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            setFormSuccess('Message sent successfully! 🎉 We will get back to you soon. 😉');
-            setName('');
-            setEmail('');
-            setMessage('');
+            const response = await fetch('http://localhost:5000/api/contact', { // Make sure this matches your backend endpoint path
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            if (response.ok) {
+                setFormSuccess('Message sent successfully! 🎉 We will get back to you soon. 😉');
+                setName('');
+                setEmail('');
+                setMessage('');
+            } else {
+                const errorData = await response.json();
+                setFormError(errorData.message || 'Oops! Something went wrong. Please try again later. 😞');
+                console.error('Form submission error:', errorData);
+            }
         } catch (error) {
-            console.error('Form submission error:', error);
+            console.error('Fetch error:', error);
             setFormError('Oops! Something went wrong. Please try again later. 😞');
+        } finally {
+            setIsSubmitting(false); // Set loading state to false after submission (success or error)
         }
     };
 
@@ -61,18 +66,16 @@ const ContactUs = ({ backgroundImage }) => {
             transition={{ duration: 1 }}
             aria-label="Contact Us Page"
         >
-            {/* Background Image - Decorative */}
             <div className="absolute inset-0 z-0">
                 <img
                     src={backgroundImage}
                     alt="Abstract background"
                     className="w-full h-full object-cover opacity-20"
-                    aria-hidden="true" // Decorative image, hide from screen readers
+                    aria-hidden="true"
                 />
             </div>
 
             <div className="relative z-10 flex flex-col lg:flex-row w-full max-w-5xl bg-gray-800 bg-opacity-95 shadow-lg rounded-xl overflow-hidden">
-                {/* Contact Form Section */}
                 <div className="lg:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
                     <motion.h2
                         className="text-3xl md:text-4xl font-bold mb-4 text-indigo-500 animate-pulse"
@@ -131,6 +134,7 @@ const ContactUs = ({ backgroundImage }) => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 aria-required="true"
+                                disabled={isSubmitting} // Disable input while submitting
                             />
                         </div>
                         <div>
@@ -143,6 +147,7 @@ const ContactUs = ({ backgroundImage }) => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 aria-required="true"
+                                disabled={isSubmitting} // Disable input while submitting
                             />
                         </div>
                         <div>
@@ -155,18 +160,26 @@ const ContactUs = ({ backgroundImage }) => {
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 aria-required="true"
+                                disabled={isSubmitting} // Disable textarea while submitting
                             ></textarea>
                         </div>
                         <button
                             type="submit"
-                            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline disabled:opacity-50 disabled:cursor-wait"
+                            disabled={isSubmitting} // Disable button while submitting
                         >
-                            Send Message ✨
+                            {isSubmitting ? (
+                                <div className="flex items-center justify-center">
+                                    <FaSpinner className="animate-spin mr-2" /> {/* Spinner icon with animation */}
+                                    Sending...
+                                </div>
+                            ) : (
+                                'Send Message ✨'
+                            )}
                         </button>
                     </motion.form>
                 </div>
 
-                {/* Contact Information Section */}
                 <div className="lg:w-1/2 bg-gray-700 p-8 md:p-12 lg:p-16 flex flex-col justify-center">
                     <motion.h3
                         className="text-2xl md:text-3xl font-bold mb-6 text-white"
@@ -194,7 +207,6 @@ const ContactUs = ({ backgroundImage }) => {
                             <FaEnvelope className="text-indigo-500 mr-3" />
                             <a href="mailto:contact@example.com" className="text-gray-300 hover:text-indigo-400 transition-colors">contact@example.com 📧</a>
                         </div>
-                        {/* Add more contact details as needed */}
                     </motion.div>
                 </div>
             </div>
@@ -203,15 +215,11 @@ const ContactUs = ({ backgroundImage }) => {
 };
 
 ContactUs.propTypes = {
-    /**
-     * URL for the background image of the contact page. 🖼️
-     * Should be a string representing a valid image URL.
-     */
     backgroundImage: PropTypes.string,
 };
 
 ContactUs.defaultProps = {
-    backgroundImage: 'https://placekitten.com/450/300', // Default background image if not provided 🐱
+    backgroundImage: 'https://placekitten.com/450/300',
 };
 
 export default ContactUs;
