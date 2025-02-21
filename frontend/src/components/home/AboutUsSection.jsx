@@ -1,5 +1,7 @@
 import React from 'react';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { motion } from 'framer-motion'; // Import motion from framer-motion
+
 const AboutUsSection = () => {
   const features = [
     {
@@ -54,9 +56,14 @@ const AboutUsSection = () => {
       title: "Nationwide Coverage",
       description: "We operate and provide our services in all parts of Algeria.",
     },
-];
+  ];
   return (
-    <section className="py-24 ">
+    <motion.section // Changed section to motion.section
+      className="py-24 "
+      initial={{ opacity: 0 }} // Initial opacity is 0
+      whileInView={{ opacity: 1 }} // Animate to opacity 1 when in view
+      transition={{ duration: 0.1 }} // Animation duration
+    >
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center mb-16 text-center">
           <span className="bg-gray-800 text-blue-400 px-4 py-1  rounded-full text-[40px] font-medium tracking-wider mb-4"> {/* Increased text size to text-[40px] */}
@@ -69,7 +76,13 @@ const AboutUsSection = () => {
 
         <div className="grid md:grid-cols-3 gap-10 max-w-5xl mx-auto">
           {features.map((feature, index) => (
-            <div key={index} className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-8 transition-all duration-300 hover:bg-gray-800/80 hover:shadow-lg hover:shadow-blue-500/5 group">
+            <motion.div // Optional: Animate each feature box individually
+              key={index}
+              className="bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-8 transition-all duration-300 hover:bg-gray-800/80 hover:shadow-lg hover:shadow-blue-500/5 group"
+              initial={{ opacity: 0, y: 50 }} // Initial opacity and y position for each feature box
+              whileInView={{ opacity: 1, y: 0 }} // Animate to opacity 1 and y 0 when in view
+              transition={{ duration: 0.5, delay: index * 0.2 }} // Stagger animation for each feature box
+            >
               <div className="mb-5 p-3 bg-gray-900/60 rounded-lg w-fit group-hover:bg-blue-900/20 transition-colors duration-300">
                 {feature.icon}
               </div>
@@ -79,11 +92,11 @@ const AboutUsSection = () => {
               <p className="text-gray-400 leading-relaxed">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
