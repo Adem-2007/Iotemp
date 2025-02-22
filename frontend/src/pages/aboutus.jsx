@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { FaStethoscope, FaHeartbeat, FaUsers, FaEnvelope, FaPhone, FaHandsHelping, FaMedal, FaLightbulb } from 'react-icons/fa';
-import  Wassim from './../../images/Wassim.jpeg'
+import  wassim from './../../images/Wassim.jpeg'
 import  terkman from './../../images/terkman.jpeg'
 import  younes from './../../images/younes.jpeg'
 
@@ -132,7 +132,7 @@ const AboutUsPage = () => {
                             transition={{ duration: 0.5, delay: 0.6 }}
                         >
                             {/* Replaced placeholder image with memeberImage as per critique */}
-                            <img src={Wassim} alt="Dr. Williams" className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-500" aria-hidden="true" />
+                            <img src={wassim} alt="Dr. Williams" className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-500" aria-hidden="true" />
                             <h4 className="text-xl font-semibold text-white">Bahloul Wassim</h4>
                             <h4 className="text-xl font-semibold text-white">Bahloul Wassim </h4>
                             <p className="text-blue-200 mb-2">SoftxHardware</p>
