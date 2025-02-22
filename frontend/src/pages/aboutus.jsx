@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { FaStethoscope, FaHeartbeat, FaUsers, FaEnvelope, FaPhone, FaHandsHelping, FaMedal, FaLightbulb } from 'react-icons/fa';
-import  wassim from './../../images/Wassim.jpeg'
+import  wassim from './../../images/wassim.jpeg'
 import  terkman from './../../images/terkman.jpeg'
 import  younes from './../../images/younes.jpeg'
 
