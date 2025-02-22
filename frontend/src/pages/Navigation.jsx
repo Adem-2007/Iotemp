@@ -11,7 +11,7 @@ const Navigation = () => {
     <nav className="bg-gray-900 py-4">
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
         <div className="text-white font-bold text-xl flex items-center space-x-2">
-          <img src={logo2} alt="Logo" className="w-16 h-10"  />
+          <Link to="/"><img src={logo2} alt="Logo" className="w-16 h-10"  /></Link>
         </div>
         <div className="flex space-x-6">
           <Link to="/" className="text-gray-300 hover:text-white flex items-center space-x-1"> {/* Changed to Link and to="/" */}
