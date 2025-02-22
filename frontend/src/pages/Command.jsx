@@ -61,7 +61,7 @@ const UserInfoForm = () => {
       setIsSubmitting(true); // Start loading
 
       try {
-        const response = await fetch('http://localhost:5000/api/user-info', { // Backend endpoint for user info
+        const response = await fetch('https://iotemp-1.onrender.com/api/user-info', { // Backend endpoint for user info
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
