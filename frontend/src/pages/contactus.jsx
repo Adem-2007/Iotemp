@@ -31,7 +31,7 @@ const ContactUs = ({ backgroundImage }) => {
         setIsSubmitting(true); // Set loading state to true before submission
 
         try {
-            const response = await fetch('http://localhost:5000/api/contact', { // Make sure this matches your backend endpoint path
+            const response = await fetch('https://iotemp-1.onrender.com/api/contact', { // Make sure this matches your backend endpoint path
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
